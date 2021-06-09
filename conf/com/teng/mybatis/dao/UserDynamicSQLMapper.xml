@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teng.mybatis.dao.UserDynamicSQLMapper">
+<!--    public User getUserByCondition(User user);-->
+    <select id="getUserByCondition" resultType="com.teng.mybatis.bean.User">
+        select * from t_user
+        <trim prefix="where" suffixOverrides="and">
+            <if test="id!=null">
+                id=#{id} and
+            </if>
+            <if test="userName!=null">
+                user_name like #{userName} and
+            </if>
+            <if test="email!=null">
+                email=#{email} and
+            </if>
+            <if test="gender!=null">
+                gender=#{gender}
+            </if>
+        </trim>
+    </select>
+
+<!--    public void batchUser(@Param("users") List<User> users);-->
+    <insert id="batchUser" >
+        insert into t_user(user_name,email,gender) values
+        <foreach collection="ulist" item="user" separator=",">
+           (#{user.userName},#{user.email},#{user.gender})
+        </foreach>
+    </insert>
+</mapper>

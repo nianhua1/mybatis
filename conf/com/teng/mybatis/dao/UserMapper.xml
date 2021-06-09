@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teng.mybatis.dao.UserMapper">
+
+<!--    public User getUserById(Integer id);-->
+    <select id="getUserById" resultType="com.teng.mybatis.bean.User">
+        select * from t_user where id=#{id}
+    </select>
+
+<!--    public List<User> getEmps();-->
+    <select id="getEmps" resultType="com.teng.mybatis.bean.User">
+        select * from  t_user
+    </select>
+
+<!--    public void addUser(User user);-->
+    <insert id="addUser">
+        insert into t_user(user_name,email,gender) values(#{userName},#{email},#{gender})
+    </insert>
+
+<!--    public void updateUser(User user);-->
+    <update id="updateUser">
+        update t_user set user_name=#{userName},email=#{email},gender=#{gender} where id=#{id}
+    </update>
+<!-- public void deleteUserById(Integer id);-->
+    <delete id="deleteUserById">
+        delete from t_user where id=#{id}
+    </delete>
+</mapper>
